@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<QuachMinhHoang_2280601063.Models.Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h2>Categories</h2>
+
+<p>
+    <a asp-action="Add" class="btn btn-primary">Add New Category</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+                <tr>
+                    <td>@category.Id</td>
+                    <td>@category.Name</td>
+                    <td>
+                        <a asp-action="Update" asp-route-id="@category.Id" class="btn btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

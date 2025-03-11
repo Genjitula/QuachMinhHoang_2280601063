@@ -1,0 +1,384 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Hero Section -->
+<div class="hero-section mb-5">
+    <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <h1 class="fw-bold">BookHaven Genjitula</h1>
+            <p class="lead text-muted mb-4">Sách là kiến thức,là sức mạnh.</p>
+            <p class="lead text-muted mb-4">"Học, học nữa, học mãi." - Hồ Chí Minh</p>
+            <div class="d-flex gap-3">
+                <a asp-controller="Product" asp-action="Index" class="btn btn-primary px-4 py-2">
+                    <i class="fas fa-book me-2"></i>Browse Books
+                </a>
+                <a href="#featured-books" class="btn btn-outline-secondary px-4 py-2">
+                    <i class="fas fa-star me-2"></i>Featured Titles
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6 text-center">
+            <img src="https://giatricuocsong.org/wp-content/uploads/2021/07/sach-kien-thuc.jpg.webp" alt="Bookstore Banner" class="img-fluid rounded shadow" />
+        </div>
+    </div>
+</div>
+
+<!-- Categories Section -->
+<section class="mb-5">
+    <h2 class="section-title mb-4">Browse by Genre</h2>
+    <div class="row g-4">
+        <div class="col-6 col-md-3">
+            <div class="category-card text-center">
+                <div class="icon-wrapper mb-3">
+                    <i class="fas fa-brain fa-2x"></i>
+                </div>
+                <h5>Non-Fiction</h5>
+                <a href="#" class="stretched-link"></a>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="category-card text-center">
+                <div class="icon-wrapper mb-3">
+                    <i class="fas fa-dragon fa-2x"></i>
+                </div>
+                <h5>Fiction</h5>
+                <a href="#" class="stretched-link"></a>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="category-card text-center">
+                <div class="icon-wrapper mb-3">
+                    <i class="fas fa-laptop-code fa-2x"></i>
+                </div>
+                <h5>Technology</h5>
+                <a href="#" class="stretched-link"></a>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="category-card text-center">
+                <div class="icon-wrapper mb-3">
+                    <i class="fas fa-child fa-2x"></i>
+                </div>
+                <h5>Children's</h5>
+                <a href="#" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Books Section -->
+<section id="featured-books" class="mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title">Featured Books</h2>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-sm btn-outline-primary">View All <i class="fas fa-arrow-right ms-1"></i></a>
+    </div>
+
+    <div class="row g-4">
+        <!-- Book Card 1 -->
+        <div class="col-md-6 col-lg-3">
+            <div class="book-card h-100">
+                <div class="book-img-wrapper">
+                    <img src="/images/lightnovel-thien_su_nha_ben_vol_1.webp" alt="Book 1" class="img-fluid" />
+                    <div class="book-badge">New Release</div>
+                    <div class="book-actions">
+                        <button class="btn btn-sm action-btn"><i class="fas fa-heart"></i></button>
+                        <button class="btn btn-sm action-btn"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+                <div class="book-info p-3">
+                    <h5 class="book-title">Thiên sứ nhà bên vol 1</h5>
+                    <div class="book-author mb-2">Light Novel</div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="book-price">
+                            <span class="current-price">$50.00</span>
+                        </div>
+                        <div class="book-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Book Card 2 -->
+        <div class="col-md-6 col-lg-3">
+            <div class="book-card h-100">
+                <div class="book-img-wrapper">
+                    <img src="/images/thien_su_nha_ben_manga_vol_2.webp" alt="Book 2" class="img-fluid" />
+                    <div class="book-badge sale">-15%</div>
+                    <div class="book-actions">
+                        <button class="btn btn-sm action-btn"><i class="fas fa-heart"></i></button>
+                        <button class="btn btn-sm action-btn"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+                <div class="book-info p-3">
+                    <h5 class="book-title">Thiên sứ nhà bên Tập 2</h5>
+                    <div class="book-author mb-2">Manga</div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="book-price">
+                            <span class="current-price">$17.00</span>
+                        </div>
+                        <div class="book-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Book Card 3 -->
+        <div class="col-md-6 col-lg-3">
+            <div class="book-card h-100">
+                <div class="book-img-wrapper">
+                    <img src="/images/arya.webp" alt="Book 3" class="img-fluid" />
+                    <div class="book-actions">
+                        <button class="btn btn-sm action-btn"><i class="fas fa-heart"></i></button>
+                        <button class="btn btn-sm action-btn"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+                <div class="book-info p-3">
+                    <h5 class="book-title">Arya Bàn Bên Vol 1</h5>
+                    <div class="book-author mb-2">Light Novel</div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="book-price">
+                            <span class="current-price">$25.00</span>
+                        </div>
+                        <div class="book-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Book Card 4 -->
+        <div class="col-md-6 col-lg-3">
+            <div class="book-card h-100">
+                <div class="book-img-wrapper">
+                    <img src="/images/105_f0b0044c4edd4209b6c31f85608de3d4_master.jpg" alt="Book 4" class="img-fluid" />
+                    <div class="book-badge bestseller">Bestseller</div>
+                    <div class="book-actions">
+                        <button class="btn btn-sm action-btn"><i class="fas fa-heart"></i></button>
+                        <button class="btn btn-sm action-btn"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+                <div class="book-info p-3">
+                    <h5 class="book-title">One Piece Tập 105</h5>
+                    <div class="book-author mb-2">Manga</div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="book-price">
+                            <span class="current-price">$20.00</span>
+                        </div>
+                        <div class="book-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Book Club Section -->
+<section class="mb-5">
+    <div class="book-club-banner p-4 rounded">
+        <div class="row align-items-center">
+            <div class="col-lg-7 mb-3 mb-lg-0">
+                <h3 class="mb-3">Join Our Book Club</h3>
+                <p class="mb-4">Get exclusive discounts, early access to new releases, and monthly book recommendations!</p>
+                <form class="d-flex">
+                    <input type="email" class="form-control me-2" placeholder="Enter your email">
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+            <div class="col-lg-5 text-center">
+                <img src="/api/placeholder/400/200" alt="Book Club" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Custom CSS -->
+<style>
+    :root {
+        --primary-color: #4CAF50; /* Green */
+        --secondary-color: #2E7D32; /* Darker Green */
+        --accent-color: #8BC34A; /* Light Green */
+        --light-gray: #f5f5f5;
+        --dark-gray: #4d4d4d;
+        --medium-gray: #9e9e9e;
+    }
+
+    body {
+        color: var(--dark-gray);
+        background-color: var(--light-gray);
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+    .btn-outline-secondary {
+        color: var(--dark-gray);
+        border-color: var(--dark-gray);
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: var(--dark-gray);
+            border-color: var(--dark-gray);
+        }
+
+    .btn-outline-primary {
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+    /* General Styles */
+    .section-title {
+        position: relative;
+        padding-bottom: 10px;
+        font-weight: 600;
+        color: var(--dark-gray);
+    }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+    /* Hero Section */
+    .hero-section {
+        padding: 2rem 0;
+    }
+
+    /* Category Cards */
+    .category-card {
+        padding: 1.5rem;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        transition: all 0.3s;
+        position: relative;
+        height: 100%;
+    }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+    .icon-wrapper {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(76, 175, 80, 0.1);
+        border-radius: 50%;
+        margin: 0 auto;
+        color: var(--primary-color);
+    }
+
+    /* Book Cards */
+    .book-card {
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        transition: all 0.3s;
+    }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+    .book-img-wrapper {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .book-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+        .book-badge.sale {
+            background-color: #F44336;
+        }
+
+        .book-badge.bestseller {
+            background-color: #FFC107;
+            color: var(--dark-gray);
+        }
+
+    .book-actions {
+        position: absolute;
+        bottom: -50px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s;
+    }
+
+    .book-card:hover .book-actions {
+        bottom: 15px;
+    }
+
+    .action-btn {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+        transition: all 0.2s;
+    }
+
+        .action-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+    .book-title {
+        font-weight: 500;
+        margin-bottom: 5px;
+        color: var(--dark-gray);
+    }
+
+    .book-author {
+        color: var(--medium-gray);
+        font-size: 0.85rem;
+    }
