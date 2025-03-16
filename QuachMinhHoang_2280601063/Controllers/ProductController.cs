@@ -10,14 +10,11 @@ namespace QuachMinhHoang_2280601063.Controllers
     {
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
-
         public ProductController(IProductRepository productRepository, ICategoryRepository categoryRepository)
         {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
         }
-
-        // Hiển thị danh sách sản phẩm
         public async Task<IActionResult> Index()
         {
             var products = await _productRepository.GetAllAsync();
@@ -59,6 +56,16 @@ namespace QuachMinhHoang_2280601063.Controllers
             return View(product);
         }
 
+        // Hiển thị form cập nhật sản phẩm
+        public async Task<IActionResult> Display(int id)
+        {
+            var product = await _productRepository.GetByIdAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
         // Hiển thị form cập nhật sản phẩm
         public async Task<IActionResult> Update(int id)
         {
@@ -113,40 +120,28 @@ namespace QuachMinhHoang_2280601063.Controllers
             }
             return View(product);
         }
-
         [HttpPost]
-        [ValidateAntiForgeryToken] // Chống tấn công CSRF
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirm(int id)
-        {
-            var product = await _productRepository.GetByIdAsync(id);
-            if (product == null)
-            {
-                return NotFound(); // Trả về lỗi 404 nếu không tìm thấy sản phẩm
-            }
-
-            try
-            {
-                await _productRepository.DeleteAsync(id); // Gọi repository để xóa sản phẩm
-                return RedirectToAction(nameof(Index)); // Chuyển hướng về trang danh sách sản phẩm
-            }
-            catch (Exception ex)
-            {
-                // Log lỗi (nếu có)
-                Console.WriteLine($"Lỗi khi xóa sản phẩm: {ex.Message}");
-                ModelState.AddModelError("", "Không thể xóa sản phẩm. Vui lòng thử lại.");
-                return View("Delete", product); // Hiển thị lại trang xác nhận xóa với thông báo lỗi
-            }
-        }
-
-        // Hiển thị chi tiết sản phẩm
-        public async Task<IActionResult> Display(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);
             if (product == null)
             {
                 return NotFound();
             }
-            return View(product);
+
+            try
+            {
+                await _productRepository.DeleteAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                // Log lỗi (nếu có)
+                Console.WriteLine($"Lỗi khi xóa sản phẩm: {ex.Message}");
+                ModelState.AddModelError("", "Không thể xóa sản phẩm. Vui lòng thử lại.");
+                return View("Delete", product);
+            }
         }
     }
 }
