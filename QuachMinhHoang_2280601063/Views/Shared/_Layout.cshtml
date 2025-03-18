@@ -150,7 +150,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Index">
                                 <i class="fas fa-box-open me-1"></i> Sản phẩm
                             </a>
                         </li>
@@ -160,11 +160,13 @@
                             </a>
                         </li>
                     </ul>
+                    <partial name="_LoginPartial" />
                     <div class="d-flex">
                         <a class="btn btn-outline-light" asp-area="" asp-controller="Product" asp-action="Add">
                             <i class="fas fa-plus me-1"></i> Add Product
                         </a>
                     </div>
+
                 </div>
             </div>
         </nav>
