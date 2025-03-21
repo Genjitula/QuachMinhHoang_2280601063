@@ -10,7 +10,7 @@
             <p class="lead text-muted mb-4">Sách là kiến thức,là sức mạnh.</p>
             <p class="lead text-muted mb-4">"Học, học nữa, học mãi." - Hồ Chí Minh</p>
             <div class="d-flex gap-3">
-                <a asp-controller="Product" asp-action="Index" class="btn btn-primary px-4 py-2">
+                <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="btn btn-primary px-4 py-2">
                     <i class="fas fa-book me-2"></i>Browse Books
                 </a>
                 <a href="#featured-books" class="btn btn-outline-secondary px-4 py-2">
@@ -71,7 +71,7 @@
 <section id="featured-books" class="mb-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="section-title">Featured Books</h2>
-        <a asp-controller="Product" asp-action="Index" class="btn btn-sm btn-outline-primary">View All <i class="fas fa-arrow-right ms-1"></i></a>
+        <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="btn btn-sm btn-outline-primary">View All <i class="fas fa-arrow-right ms-1"></i></a>
     </div>
 
     <div class="row g-4">
