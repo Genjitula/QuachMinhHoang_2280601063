@@ -9,7 +9,5 @@ namespace QuachMinhHoang_2280601063.Repositories
         Task AddAsync(Product product);
         Task UpdateAsync(Product product);
         Task DeleteAsync(int id);
-        Task<bool> HasProductsInCategory(int categoryId);
-        Task<int> GetTotalProductsCount();
     }
 }

@@ -12,17 +12,13 @@ namespace QuachMinhHoang_2280601063.Repositories
         }
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            // return await _context.Products.ToListAsync();
             return await _context.Products
-            .Include(p => p.Category) // Include thông tin về category
-            .ToListAsync();
+                .Include(p => p.Category)
+                .ToListAsync();
         }
         public async Task<Product> GetByIdAsync(int id)
         {
-            // return await _context.Products.FindAsync(id);
-            // lấy thông tin kèm theo category
-            return await _context.Products.Include(p =>
-           p.Category).FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.Products.FindAsync(id);
         }
         public async Task AddAsync(Product product)
         {
@@ -36,17 +32,22 @@ namespace QuachMinhHoang_2280601063.Repositories
         }
         public async Task DeleteAsync(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-        }
-        public async Task<bool> HasProductsInCategory(int categoryId)
-        {
-            return await _context.Products.AnyAsync(p => p.CategoryId == categoryId);
-        }
-        public async Task<int> GetTotalProductsCount()
-        {
-            return await _context.Products.CountAsync();
+            var product = await _context.Products
+                .Include(p => p.Images) // Nếu có bảng liên quan (ví dụ: ProductImage)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product != null)
+            {
+                // Xóa các bản ghi liên quan (nếu có)
+                if (product.Images != null && product.Images.Any())
+                {
+                    _context.ProductImages.RemoveRange(product.Images);
+                }
+
+                // Xóa sản phẩm
+                _context.Products.Remove(product);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
