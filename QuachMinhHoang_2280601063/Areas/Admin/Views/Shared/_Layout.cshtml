@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - QuachMinhHoang Store</title>
+    <title>@ViewData["Title"] - Admin</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
@@ -40,9 +40,9 @@
             font-size: 1.4rem;
         }
 
-        .navbar-brand span {
-            color: var(--accent-color);
-        }
+            .navbar-brand span {
+                color: var(--accent-color);
+            }
 
         .nav-link {
             color: rgba(255, 255, 255, 0.8) !important;
@@ -52,24 +52,24 @@
             position: relative;
         }
 
-        .nav-link:hover {
-            color: white !important;
-        }
+            .nav-link:hover {
+                color: white !important;
+            }
 
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s;
-        }
+            .nav-link:after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                background: var(--accent-color);
+                bottom: -5px;
+                left: 0;
+                transition: width 0.3s;
+            }
 
-        .nav-link:hover:after {
-            width: 100%;
-        }
+            .nav-link:hover:after {
+                width: 100%;
+            }
 
         .navbar-toggler {
             border: none;
@@ -97,14 +97,14 @@
             margin-top: 3rem;
         }
 
-        .footer a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
+            .footer a {
+                color: var(--accent-color);
+                text-decoration: none;
+            }
 
-        .footer a:hover {
-            text-decoration: underline;
-        }
+                .footer a:hover {
+                    text-decoration: underline;
+                }
 
         /* Button styling */
         .btn-primary {
@@ -112,10 +112,10 @@
             border-color: var(--primary-color);
         }
 
-        .btn-primary:hover {
-            background-color: #2980b9;
-            border-color: #2980b9;
-        }
+            .btn-primary:hover {
+                background-color: #2980b9;
+                border-color: #2980b9;
+            }
 
         /* Card styling for potential product displays */
         .card {
@@ -125,17 +125,17 @@
             margin-bottom: 1.5rem;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
     </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand" asp-area="Admin" asp-controller="Admin" asp-action="Index">
                     <i class="fas fa-store-alt me-2"></i>Quach<span>Minh</span>Hoang
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -145,7 +145,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Admin" asp-action="Index">
                                 <i class="fas fa-home me-1"></i> Home
                             </a>
                         </li>
