@@ -1,168 +1,168 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<QuachMinhHoang_2280601063.Models.Product>
 @{
-}
-@model IEnumerable<QuachMinhHoang_2280601063.Models.Product>
-@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Product List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="products-header d-flex justify-content-between align-items-center mb-4">
-    <h2 class="section-title">Book Collection</h2>
-</div>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <!-- Header with view toggle -->
+        <div class="products-header d-flex justify-content-between align-items-center mb-4">
+            <h2 class="section-title">Our Products</h2>
+            <div class="btn-group">
+                <button class="btn btn-outline-secondary active" id="grid-view-btn">
+                    <i class="fas fa-th"></i> Grid
+                </button>
+                <button class="btn btn-outline-secondary" id="list-view-btn">
+                    <i class="fas fa-list"></i> List
+                </button>
+            </div>
+        </div>
 
-<!-- Books Grid View -->
-<div class="row g-4">
-    @foreach (var product in Model)
-    {
-        <div class="col-md-6 col-lg-3 mb-4">
-            <div class="book-card h-100">
-                <div class="book-img-wrapper">
-                    @if (!string.IsNullOrEmpty(product.ImageUrl))
-                    {
-                        <img src="@product.ImageUrl" alt="@product.Name" class="img-fluid book-cover" />
-                    }
-                    else
-                    {
-                        <img src="/api/placeholder/300/450" alt="@product.Name" class="img-fluid book-cover" />
-                    }
-                    <div class="book-actions">
-                        <a asp-action="Display" asp-route-id="@product.Id" class="btn btn-sm action-btn">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="book-info p-3">
-                    <h5 class="book-title text-truncate">@product.Name</h5>
-                    <div class="book-author mb-2">@product.Category?.Name</div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="book-price">
-                            <span class="current-price">@product.Price.ToString("C")</span>
+        <!-- Grid View -->
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="grid-view">
+            @foreach (var item in Model)
+            {
+                <div class="col mb-5">
+                    <div class="card h-100 product-card">
+                        <!-- Product image-->
+                        <div class="product-img-wrapper">
+                            @if (!string.IsNullOrEmpty(item.ImageUrl))
+                            {
+                                <img class="card-img-top" src="@item.ImageUrl" alt="@item.Name" />
+                            }
+                            else
+                            {
+                                <img class="card-img-top" src="/images/placeholder-product.png" alt="Placeholder" />
+                            }
+                            <div class="product-actions">
+                                <a asp-action="Display" asp-route-id="@item.Id" class="btn btn-sm action-btn">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <button class="btn btn-sm action-btn add-to-cart" data-product-id="@item.Id">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder product-title">@item.Name</h5>
+                                <!-- Product category-->
+                                <div class="product-category mb-2">@item.Category?.Name</div>
+                                <!-- Product price-->
+                                <div class="product-price">
+                                    @item.Price.ToString("#,##0") VNĐ
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center">
+                                <button class="btn btn-outline-dark add-to-cart-btn" data-product-id="@item.Id">
+                                    <i class="fas fa-cart-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+            }
+        </div>
+
+        <!-- List View (hidden by default) -->
+        <div class="list-view d-none" id="list-view">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                        {
+                                            <img src="@item.ImageUrl" alt="@item.Name" class="me-3 product-thumbnail">
+                                        }
+                                        else
+                                        {
+                                            <img src="/images/placeholder-product.png" alt="Placeholder" class="me-3 product-thumbnail">
+                                        }
+                                        <div>
+                                            <h6 class="mb-0">@item.Name</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>@item.Category?.Name</td>
+                                <td>@item.Price.ToString("#,##0") VNĐ</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a asp-action="Display" asp-route-id="@item.Id" class="btn btn-sm btn-info">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <button class="btn btn-sm btn-success add-to-cart" data-product-id="@item.Id">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
-    }
-</div>
-
-<!-- List View Toggle (for mobile or as alternative view) -->
-<div class="list-view d-none">
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead class="table-light">
-                <tr>
-                    <th>Book</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var product in Model)
-                {
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                @if (!string.IsNullOrEmpty(product.ImageUrl))
-                                {
-                                    <img src="@product.ImageUrl" alt="@product.Name" class="me-3" style="width: 50px; height: 75px; object-fit: cover;">
-                                }
-                                else
-                                {
-                                    <img src="/api/placeholder/50/75" alt="@product.Name" class="me-3">
-                                }
-                                <div>
-                                    <h6 class="mb-0">@product.Name</h6>
-                                </div>
-                            </div>
-                        </td>
-                        <td>@product.Category?.Name</td>
-                        <td>@product.Price.ToString("C")</td>
-                        <td>
-                            <div class="btn-group">
-                                <a asp-action="Display" asp-route-id="@product.Id" class="btn btn-sm btn-info">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
     </div>
-</div>
-
-<!-- View Toggle Buttons -->
-<div class="d-flex justify-content-end mt-4 mb-4">
-    <div class="btn-group">
-        <button class="btn btn-outline-secondary active" id="grid-view-btn">
-            <i class="fas fa-th"></i> Grid
-        </button>
-        <button class="btn btn-outline-secondary" id="list-view-btn">
-            <i class="fas fa-list"></i> List
-        </button>
-    </div>
-</div>
+</section>
 
 <style>
     :root {
-        --primary-color: #4CAF50; /* Green */
-        --secondary-color: #2E7D32; /* Darker Green */
-        --accent-color: #8BC34A; /* Light Green */
+        --primary-color: #4CAF50;
+        --secondary-color: #2E7D32;
+        --accent-color: #8BC34A;
         --light-gray: #f5f5f5;
         --dark-gray: #4d4d4d;
         --medium-gray: #9e9e9e;
-        --danger: #e53935;
     }
 
-    /* Section Title */
-    .section-title {
-        position: relative;
-        padding-bottom: 10px;
-        font-weight: 600;
-        color: var(--dark-gray);
-    }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background-color: var(--primary-color);
-        }
-
-    /* Book Cards */
-    .book-card {
-        background-color: white;
+    /* Product Card Styles */
+    .product-card {
+        transition: all 0.3s ease;
         border-radius: 8px;
         overflow: hidden;
         box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        transition: all 0.3s;
     }
 
-        .book-card:hover {
+        .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
 
-    .book-img-wrapper {
+    .product-img-wrapper {
         position: relative;
+        height: 200px;
         overflow: hidden;
-        height: 300px;
     }
 
-    .book-cover {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+        .product-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
 
-    .book-actions {
+        .product-img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+    .product-actions {
         position: absolute;
         bottom: -50px;
         left: 0;
@@ -173,7 +173,7 @@
         transition: all 0.3s;
     }
 
-    .book-card:hover .book-actions {
+    .product-card:hover .product-actions {
         bottom: 15px;
     }
 
@@ -194,75 +194,409 @@
             color: white;
         }
 
-        .action-btn.danger:hover {
-            background-color: var(--danger);
-            color: white;
-        }
-
-    .book-title {
-        font-weight: 500;
-        margin-bottom: 5px;
+    .product-title {
+        font-weight: 600;
         color: var(--dark-gray);
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
     }
 
-    .book-author {
+    .product-category {
         color: var(--medium-gray);
         font-size: 0.85rem;
     }
 
-    .current-price {
+    .product-price {
         font-weight: 600;
         color: var(--primary-color);
+        font-size: 1.1rem;
     }
 
-    /* Button Styling */
-    .btn-primary {
-        background-color: var(--primary-color);
-        border-color: var(--primary-color);
+    .add-to-cart-btn {
+        transition: all 0.3s;
     }
 
-        .btn-primary:hover {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
-        }
-
-    .btn-outline-primary {
-        color: var(--primary-color);
-        border-color: var(--primary-color);
-    }
-
-        .btn-outline-primary:hover {
+        .add-to-cart-btn:hover {
             background-color: var(--primary-color);
-            border-color: var(--primary-color);
             color: white;
         }
 
-    /* Responsive tweaks */
-    .book-img-wrapper {
-        height: 200px;
+    /* List View Styles */
+    .product-thumbnail {
+        width: 60px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 4px;
     }
 
+    /* Section Title */
+    .section-title {
+        position: relative;
+        padding-bottom: 10px;
+        font-weight: 600;
+        color: var(--dark-gray);
+    }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+    /* Responsive Adjustments */
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 1.25rem;
+    }
+
+    .card-footer {
+        background-color: rgba(0,0,0,0.03);
+    }
 </style>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const gridViewBtn = document.getElementById('grid-view-btn');
-        const listViewBtn = document.getElementById('list-view-btn');
-        const gridView = document.querySelector('.row.g-4');
-        const listView = document.querySelector('.list-view');
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // View toggle functionality
+            const gridViewBtn = document.getElementById('grid-view-btn');
+            const listViewBtn = document.getElementById('list-view-btn');
+            const gridView = document.getElementById('grid-view');
+            const listView = document.getElementById('list-view');
 
-        gridViewBtn.addEventListener('click', function() {
-            gridView.classList.remove('d-none');
-            listView.classList.add('d-none');
-            gridViewBtn.classList.add('active');
-            listViewBtn.classList.remove('active');
-        });
+            gridViewBtn.addEventListener('click', function () {
+                gridView.classList.remove('d-none');
+                listView.classList.add('d-none');
+                gridViewBtn.classList.add('active');
+                listViewBtn.classList.remove('active');
+            });
 
-        listViewBtn.addEventListener('click', function() {
-            gridView.classList.add('d-none');
-            listView.classList.remove('d-none');
-            gridViewBtn.classList.remove('active');
-            listViewBtn.classList.add('active');
+            listViewBtn.addEventListener('click', function () {
+                gridView.classList.add('d-none');
+                listView.classList.remove('d-none');
+                gridViewBtn.classList.remove('active');
+                listViewBtn.classList.add('active');
+            });
+
+            // Add to cart functionality
+            document.querySelectorAll('.add-to-cart, .add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const productId = this.getAttribute('data-product-id');
+                    addToCart(productId, 1); // Default quantity is 1
+                });
+            });
+
+            function addToCart(productId, quantity) {
+                fetch('/ShoppingCart/AddToCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: JSON.stringify({
+                        productId: parseInt(productId),
+                        quantity: parseInt(quantity)
+                    })
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error('Network response was not ok.');
+                    })
+                    .then(data => {
+                        // Update cart count in navbar
+                        const cartCountElements = document.querySelectorAll('.cart-count');
+                        cartCountElements.forEach(el => {
+                            el.textContent = data.cartCount;
+                        });
+
+                        // Show success message
+                        toastr.success('Product added to cart successfully!');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        toastr.error('Failed to add product to cart');
+                    });
+            }
         });
-    });
-</script>
+    </script>
+}
+
+
+
+
+@*     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860 *@
+
+@* @{ *@
+@* } *@
+@* @model IEnumerable<QuachMinhHoang_2280601063.Models.Product> *@
+@* @{ *@
+@*     ViewData["Title"] = "Index"; *@
+@*     Layout = "~/Views/Shared/_Layout.cshtml"; *@
+@* } *@
+
+@* <div class="products-header d-flex justify-content-between align-items-center mb-4"> *@
+@*     <h2 class="section-title">Book Collection</h2> *@
+@* </div> *@
+
+@* <!-- Books Grid View --> *@
+@* <div class="row g-4"> *@
+@*     @foreach (var product in Model) *@
+@*     { *@
+@*         <div class="col-md-6 col-lg-3 mb-4"> *@
+@*             <div class="book-card h-100"> *@
+@*                 <div class="book-img-wrapper"> *@
+@*                     @if (!string.IsNullOrEmpty(product.ImageUrl)) *@
+@*                     { *@
+@*                         <img src="@product.ImageUrl" alt="@product.Name" class="img-fluid book-cover" /> *@
+@*                     } *@
+@*                     else *@
+@*                     { *@
+@*                         <img src="/api/placeholder/300/450" alt="@product.Name" class="img-fluid book-cover" /> *@
+@*                     } *@
+@*                     <div class="book-actions"> *@
+@*                         <a asp-action="Display" asp-route-id="@product.Id" class="btn btn-sm action-btn"> *@
+@*                             <i class="fas fa-eye"></i> *@
+@*                         </a> *@
+@*                     </div> *@
+@*                 </div> *@
+@*                 <div class="book-info p-3"> *@
+@*                     <h5 class="book-title text-truncate">@product.Name</h5> *@
+@*                     <div class="book-author mb-2">@product.Category?.Name</div> *@
+@*                     <div class="d-flex justify-content-between align-items-center"> *@
+@*                         <div class="book-price"> *@
+@*                             <span class="current-price">@product.Price.ToString("C")</span> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*     } *@
+@* </div> *@
+
+@* <!-- List View Toggle (for mobile or as alternative view) --> *@
+@* <div class="list-view d-none"> *@
+@*     <div class="table-responsive"> *@
+@*         <table class="table table-hover"> *@
+@*             <thead class="table-light"> *@
+@*                 <tr> *@
+@*                     <th>Book</th> *@
+@*                     <th>Category</th> *@
+@*                     <th>Price</th> *@
+@*                     <th>Actions</th> *@
+@*                 </tr> *@
+@*             </thead> *@
+@*             <tbody> *@
+@*                 @foreach (var product in Model) *@
+@*                 { *@
+@*                     <tr> *@
+@*                         <td> *@
+@*                             <div class="d-flex align-items-center"> *@
+@*                                 @if (!string.IsNullOrEmpty(product.ImageUrl)) *@
+@*                                 { *@
+@*                                     <img src="@product.ImageUrl" alt="@product.Name" class="me-3" style="width: 50px; height: 75px; object-fit: cover;"> *@
+@*                                 } *@
+@*                                 else *@
+@*                                 { *@
+@*                                     <img src="/api/placeholder/50/75" alt="@product.Name" class="me-3"> *@
+@*                                 } *@
+@*                                 <div> *@
+@*                                     <h6 class="mb-0">@product.Name</h6> *@
+@*                                 </div> *@
+@*                             </div> *@
+@*                         </td> *@
+@*                         <td>@product.Category?.Name</td> *@
+@*                         <td>@product.Price.ToString("C")</td> *@
+@*                         <td> *@
+@*                             <div class="btn-group"> *@
+@*                                 <a asp-action="Display" asp-route-id="@product.Id" class="btn btn-sm btn-info"> *@
+@*                                     <i class="fas fa-eye"></i> *@
+@*                                 </a> *@
+@*                             </div> *@
+@*                         </td> *@
+@*                     </tr> *@
+@*                 } *@
+@*             </tbody> *@
+@*         </table> *@
+@*     </div> *@
+@* </div> *@
+
+@* <!-- View Toggle Buttons --> *@
+@* <div class="d-flex justify-content-end mt-4 mb-4"> *@
+@*     <div class="btn-group"> *@
+@*         <button class="btn btn-outline-secondary active" id="grid-view-btn"> *@
+@*             <i class="fas fa-th"></i> Grid *@
+@*         </button> *@
+@*         <button class="btn btn-outline-secondary" id="list-view-btn"> *@
+@*             <i class="fas fa-list"></i> List *@
+@*         </button> *@
+@*     </div> *@
+@* </div> *@
+
+@* <style> *@
+@*     :root { *@
+@*         --primary-color: #4CAF50; /* Green */ *@
+@*         --secondary-color: #2E7D32; /* Darker Green */ *@
+@*         --accent-color: #8BC34A; /* Light Green */ *@
+@*         --light-gray: #f5f5f5; *@
+@*         --dark-gray: #4d4d4d; *@
+@*         --medium-gray: #9e9e9e; *@
+@*         --danger: #e53935; *@
+@*     } *@
+
+@*     /* Section Title */ *@
+@*     .section-title { *@
+@*         position: relative; *@
+@*         padding-bottom: 10px; *@
+@*         font-weight: 600; *@
+@*         color: var(--dark-gray); *@
+@*     } *@
+
+@*         .section-title:after { *@
+@*             content: ''; *@
+@*             position: absolute; *@
+@*             bottom: 0; *@
+@*             left: 0; *@
+@*             width: 60px; *@
+@*             height: 3px; *@
+@*             background-color: var(--primary-color); *@
+@*         } *@
+
+@*     /* Book Cards */ *@
+@*     .book-card { *@
+@*         background-color: white; *@
+@*         border-radius: 8px; *@
+@*         overflow: hidden; *@
+@*         box-shadow: 0 3px 10px rgba(0,0,0,0.08); *@
+@*         transition: all 0.3s; *@
+@*     } *@
+
+@*         .book-card:hover { *@
+@*             transform: translateY(-5px); *@
+@*             box-shadow: 0 8px 15px rgba(0,0,0,0.1); *@
+@*         } *@
+
+@*     .book-img-wrapper { *@
+@*         position: relative; *@
+@*         overflow: hidden; *@
+@*         height: 300px; *@
+@*     } *@
+
+@*     .book-cover { *@
+@*         width: 100%; *@
+@*         height: 100%; *@
+@*         object-fit: cover; *@
+@*     } *@
+
+@*     .book-actions { *@
+@*         position: absolute; *@
+@*         bottom: -50px; *@
+@*         left: 0; *@
+@*         right: 0; *@
+@*         display: flex; *@
+@*         justify-content: center; *@
+@*         gap: 10px; *@
+@*         transition: all 0.3s; *@
+@*     } *@
+
+@*     .book-card:hover .book-actions { *@
+@*         bottom: 15px; *@
+@*     } *@
+
+@*     .action-btn { *@
+@*         width: 35px; *@
+@*         height: 35px; *@
+@*         display: flex; *@
+@*         align-items: center; *@
+@*         justify-content: center; *@
+@*         background-color: white; *@
+@*         border-radius: 50%; *@
+@*         box-shadow: 0 3px 5px rgba(0,0,0,0.1); *@
+@*         transition: all 0.2s; *@
+@*     } *@
+
+@*         .action-btn:hover { *@
+@*             background-color: var(--primary-color); *@
+@*             color: white; *@
+@*         } *@
+
+@*         .action-btn.danger:hover { *@
+@*             background-color: var(--danger); *@
+@*             color: white; *@
+@*         } *@
+
+@*     .book-title { *@
+@*         font-weight: 500; *@
+@*         margin-bottom: 5px; *@
+@*         color: var(--dark-gray); *@
+@*     } *@
+
+@*     .book-author { *@
+@*         color: var(--medium-gray); *@
+@*         font-size: 0.85rem; *@
+@*     } *@
+
+@*     .current-price { *@
+@*         font-weight: 600; *@
+@*         color: var(--primary-color); *@
+@*     } *@
+
+@*     /* Button Styling */ *@
+@*     .btn-primary { *@
+@*         background-color: var(--primary-color); *@
+@*         border-color: var(--primary-color); *@
+@*     } *@
+
+@*         .btn-primary:hover { *@
+@*             background-color: var(--secondary-color); *@
+@*             border-color: var(--secondary-color); *@
+@*         } *@
+
+@*     .btn-outline-primary { *@
+@*         color: var(--primary-color); *@
+@*         border-color: var(--primary-color); *@
+@*     } *@
+
+@*         .btn-outline-primary:hover { *@
+@*             background-color: var(--primary-color); *@
+@*             border-color: var(--primary-color); *@
+@*             color: white; *@
+@*         } *@
+
+@*     /* Responsive tweaks */ *@
+@*     .book-img-wrapper { *@
+@*         height: 200px; *@
+@*     } *@
+
+@* </style> *@
+
+@* <script> *@
+@*     document.addEventListener('DOMContentLoaded', function() { *@
+@*         const gridViewBtn = document.getElementById('grid-view-btn'); *@
+@*         const listViewBtn = document.getElementById('list-view-btn'); *@
+@*         const gridView = document.querySelector('.row.g-4'); *@
+@*         const listView = document.querySelector('.list-view'); *@
+
+@*         gridViewBtn.addEventListener('click', function() { *@
+@*             gridView.classList.remove('d-none'); *@
+@*             listView.classList.add('d-none'); *@
+@*             gridViewBtn.classList.add('active'); *@
+@*             listViewBtn.classList.remove('active'); *@
+@*         }); *@
+
+@*         listViewBtn.addEventListener('click', function() { *@
+@*             gridView.classList.add('d-none'); *@
+@*             listView.classList.remove('d-none'); *@
+@*             gridViewBtn.classList.remove('active'); *@
+@*             listViewBtn.classList.add('active'); *@
+@*         }); *@
+@*     }); *@
+@* </script> *@
